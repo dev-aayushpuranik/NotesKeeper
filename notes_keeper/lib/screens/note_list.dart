@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_keeper/screens/note_detail.dart';
 
 class NoteList extends StatefulWidget {
   const NoteList({super.key});
@@ -18,11 +19,14 @@ int count = 1;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notes"),
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
+        backgroundColor: Colors.deepPurple,
+
       ),
       body: getNotesListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          navigateToNoteDetails("Add Note");
       },
       shape: const CircleBorder(
         eccentricity: BorderSide.strokeAlignOutside
@@ -55,11 +59,17 @@ int count = 1;
             trailing: Icon(Icons.delete, color: Colors.grey,),
 
             onTap: () {
-              debugPrint("this is debug print");
+              navigateToNoteDetails("Edit Note");
             },
             ),
         );
       }, 
     );
+  }
+
+  void navigateToNoteDetails(String title) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return NoteDetail(title);
+    }));
   }
   }
